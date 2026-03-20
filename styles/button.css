@@ -1,0 +1,122 @@
+.button {
+  --button-height: var(--spacing-button-height);
+  --button-border-width: 1px;
+  --button-bg: var(--color-text);
+  --button-color: var(--color-bg);
+  --button-border: var(--button-bg);
+  --button-radius: var(--radius-button);
+  --button-hover-bg: var(--color-text);
+  --button-hover-color: var(--color-bg);
+  --button-hover-border: var(--button-hover-bg);
+  --button-hover-radius: 0;
+  --button-h-padding: calc(var(--button-height) / 3);
+  
+  height: var(--button-height);
+  padding: 0 var(--button-h-padding) 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--button-bg);
+  border: var(--button-border-width) solid var(--button-border);
+  border-radius: var(--button-radius);
+  color: var(--button-color);
+  cursor: pointer;
+  @apply h6;
+  
+  .button-content {
+    font-weight: var(--font-weight-bold);
+  }
+
+  &.disabled,
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    .button-content {
+      opacity: .5;
+    }
+  }
+
+  &:not([class*='transition']) {
+    transition:
+      background var(--speed-md) ease-in-out,
+      border var(--speed-md) ease-in-out,
+      opacity var(--speed-md) ease-in-out,
+      color var(--speed-md) ease-in-out,
+      box-shadow var(--speed-md) ease-in-out,
+      transform var(--speed-md) ease-in-out,
+      border-radius var(--speed-md) ease-in-out;
+  }
+
+  /* Button Themes */
+  &.hollow,
+  &.secondary {
+    --button-bg: transparent;
+    --button-color: var(--color-text);
+    --button-border: var(--color-text);
+    --button-radius: 0;
+    --button-hover-bg: var(--color-text);
+    --button-hover-color: var(--color-bg);
+    --button-hover-border: var(--color-text);
+    --button-hover-radius: var(--radius-button);
+  }
+
+  &.transparent {
+    --button-bg: transparent;
+    --button-color: currentcolor;
+    --button-border: transparent;
+    --button-hover-bg: transparent;
+    --button-hover-color: currentcolor;
+    --button-hover-border: transparent;
+  }
+
+  /* Button Sizes */
+  &.small {
+    --button-height: 24px;
+  }
+
+  &.large {
+    --button-height: 70px;
+  }
+
+  /* Button Shapes */
+  &.square,
+  &.circle {
+    width: var(--button-height);
+    padding: 0;
+    &.unpadd {
+      margin: -12px;
+    }
+  }
+
+  &.circle {
+    border-radius: 50%;
+  }
+
+  &.square .button-label,
+  &.circle .button-label {
+    display: none;
+  }
+
+  /* Remove Horizontal Padding */
+  &.unpadd {
+    margin: 0 calc(var(--button-h-padding) * -1);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      --button-color: var(--button-hover-color);
+      --button-bg: var(--button-hover-bg);
+      --button-border: var(--button-hover-border);
+      --button-radius: var(--button-hover-radius);
+    }
+  }
+}
+
+/* Special case for button "Tag" style */
+.button.tag {
+  --button-height: 24px;
+  @extend .body-small;
+  border-radius: var(--button-height);
+  padding: 0 calc(var(--button-height) / 3);
+}

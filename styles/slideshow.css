@@ -1,0 +1,112 @@
+.slider {
+  /* make sure wrppaer has access to same variables */
+  --slide-gap: var(--spacing-gutter);
+  --slides-to-show: var(--slides-xs, 1);
+  @media (min-width: 640px) { --slides-to-show: var(--slides-sm, 1); }
+  @media (min-width: 768px) { --slides-to-show: var(--slides-md, 1); }
+  @media (min-width: 1024px) { --slides-to-show: var(--slides-lg, 1); }
+  @media (min-width: 1280px) { --slides-to-show: var(--slides-xl, 1); }
+  @media (min-width: 1536px) { --slides-to-show: var(--slides-2xl, 1); }
+  --slide-width: calc((100% - var(--slide-gap) * (var(--slides-to-show) - 1)) / var(--slides-to-show));
+}
+
+.slider:not([data-active='false']),
+slide-show:not([data-active='false']) {
+  display: block;
+
+  &:not(.overflow-visible) {
+    overflow: hidden;
+  }
+
+  /* Keyboard focus indicator */
+  &:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &.h-full {
+    .slider-container {
+      height: 100%;
+    }
+  }
+
+  .slider-container {
+    display: flex;
+    grid-column-gap: var(--slide-gap);
+  }
+
+  img, video {
+    user-select: none;
+  }
+
+  .slider-slide {
+    &:not(.auto-width) {
+      flex: 0 0 calc((100% / var(--slides-to-show)) - var(--slide-gap) * (var(--slides-to-show) - 1) / var(--slides-to-show));
+      flex: 0 0 var(--slide-width);
+    }
+    &.auto-width {
+      flex-shrink: 0;
+    }
+
+    min-width: 0;
+    img, video {
+      min-width: 100%;
+    }
+  }
+
+  /* Styles for when slideshow loops */
+  &.loop,
+  &[data-loop='true'] {
+    .slider-container {
+      grid-column-gap: 0;
+      .slider-slide {
+        --slide-width: calc(((100% - var(--slide-gap) * (var(--slides-to-show) - 1)) / var(--slides-to-show)) + var(--slide-gap));
+        padding: 0 calc(var(--slide-gap) / 1) 0 0;
+      }
+    }
+  }
+
+  &.axis-y {
+    .slider-container {
+      flex-direction: column;
+      grid-column-gap: 0;
+      height: 100%;
+    }
+  }
+
+  &.center-aligned {
+    .slider-container {
+      grid-column-gap: 0;
+      .slider-slide {
+        padding-right: calc(var(--slide-gap) / 2);
+        padding-left: calc(var(--slide-gap) / 2);
+      }
+    }
+  }
+
+}
+
+@keyframes progress {
+  0% { width: 0 }
+  100% { width: 100% }
+}
+
+@keyframes progress-end {
+  0% { width: 100% }
+  100% { width: 0% }
+}
+
+.slide-progress {
+  transition: width 500ms ease-in-out;
+  &.animating {
+    animation: progress var(--timeout, 4000ms) linear;
+  }
+  &.ended {
+    float: right;
+    animation: progress-end var(--timeout, 300ms) ease-in;
+  }
+}

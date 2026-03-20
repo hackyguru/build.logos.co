@@ -1,0 +1,267 @@
+import React, { useState } from "react";
+import Head from "next/head";
+import Link from "@components/Link";
+import TextLink from "@components/TextLink";
+import Button from "@components/Button";
+import { Logomark } from "@components/Logo";
+import ScrollEntrance from "@components/ScrollEntrance";
+import cx from "classnames";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import { fetchPrizes, type PrizeData } from "@/lib/prizes";
+
+/* ─────────────────────── Header ─────────────────────────────── */
+
+const SiteHeader = () => (
+  <div className="sticky top-0 z-[11] h-0">
+    <header className="main-header bg-bg h-header-height-expanded transition-all">
+      <div className="px-margin grid grid-cols-2 gap-gutter items-center h-full">
+        <div className="h-full flex items-center">
+          <TextLink to="/" underlined={false}>
+            Logos
+          </TextLink>
+        </div>
+        <div className="flex items-center h-full justify-end">
+          <div className="w-header-logo-width">
+            <Link to="/" title="Go to homepage" className="block">
+              <Logomark className="flex items-center" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+);
+
+/* ───────────── Prize Grid Card ──────────────────────────────── */
+
+const PrizeCard = ({ prize }: { prize: PrizeData }) => (
+  <div>
+    <Link
+      to={prize.githubUrl}
+      target="_blank"
+      className="p-gutter border rounded-[12px] h-full flex flex-col gap-gutter aspect-square transition-[background] hover:bg-main!"
+    >
+      <div className="w-full grow space-y-4">
+        <div className="flex items-baseline justify-between gap-2">
+          <span className="body-tiny opacity-60">{prize.number}</span>
+          {prize.status && (
+            <span
+              className={cx("body-tiny px-2 py-[2px] rounded-full", {
+                "bg-green-100 text-green-800":
+                  prize.status.toLowerCase().includes("open"),
+                "bg-yellow-100 text-yellow-800":
+                  prize.status.toLowerCase().includes("draft"),
+                "bg-blue-100 text-blue-800":
+                  prize.status.toLowerCase().includes("completed"),
+              })}
+            >
+              {prize.status.split(" - ")[0].replace(/^draft$/i, "Draft").replace(/^open$/i, "Open")}
+            </span>
+          )}
+        </div>
+        <p className="h5 sans text-balance max-w-[14em]">{prize.title}</p>
+        <div className="flex gap-3 flex-wrap">
+          {prize.effort && (
+            <span className="body-tiny opacity-60">Effort: {prize.effort}</span>
+          )}
+          {prize.prize && prize.prize !== "TBD" && (
+            <span className="body-tiny opacity-60">Prize: ${prize.prize}</span>
+          )}
+        </div>
+        <div className="mt-gutter">
+          <Button as="span" className="secondary" arrow>
+            Learn More
+          </Button>
+        </div>
+      </div>
+      {prize.overview && (
+        <div className="w-full flex items-end">
+          <p className="body-tiny max-w-[26em]">{prize.overview}</p>
+        </div>
+      )}
+    </Link>
+  </div>
+);
+
+/* ───────────── Prize List Row ───────────────────────────────── */
+
+const PrizeRow = ({
+  index,
+  prize,
+}: {
+  index: number;
+  prize: PrizeData;
+}) => (
+  <li className={cx("theme-light-grey", { "bg-[#1525210D]!": index % 2 !== 0 })}>
+    <div className="px-margin py-gutter flex gap-y-gutter flex-wrap lg:grid lg:grid-cols-12 lg:gap-x-gutter lg:min-h-[70px]">
+      <div className="grow sm:grow-0 flex gap-1 items-baseline sm:w-[calc(50%-var(--spacing-gutter)/2)] sm:mr-gutter lg:col-span-1 lg:mr-0 lg:w-full">
+        <span className="body grow-0 shrink-0 w-[2em]">
+          {prize.number.replace("LP-", "")}
+        </span>
+      </div>
+      <div className="grow sm:grow-0 flex gap-1 items-baseline lg:col-span-3 lg:w-full">
+        <span className="body serif">{prize.title}</span>
+      </div>
+      <div className="order-3 w-full lg:order-2 lg:col-span-4 sm:pl-[calc(50%+var(--spacing-gutter)/2)] lg:pl-0">
+        <p className="text-balance body-tiny whitespace-pre-wrap max-w-[32em]">
+          {prize.overview}
+        </p>
+      </div>
+      <div className="order-2 lg:order-3 lg:col-span-2">
+        <div className="flex gap-2 flex-wrap">
+          {prize.effort && (
+            <span className="body-tiny opacity-60">Effort: {prize.effort}</span>
+          )}
+          {prize.status && (
+            <span className="body-tiny opacity-60">· {prize.status.split(" - ")[0]}</span>
+          )}
+        </div>
+      </div>
+      <div className="order-4 lg:order-4 lg:col-span-2">
+        <TextLink to={prize.githubUrl} target="_blank" arrow>
+          View Prize
+        </TextLink>
+      </div>
+    </div>
+  </li>
+);
+
+/* ──────────────────────── Page ──────────────────────────────── */
+
+export default function PrizePage({
+  prizes,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [view, setView] = useState<"grid" | "list">("grid");
+
+  return (
+    <>
+      <Head>
+        <title>Prizes | Logos Builders Hub</title>
+        <meta name="description" content="Compete for prizes by building on the Logos execution layer. Browse the Lambda Prize program and ship code to win funding." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Prizes | Logos Builders Hub" />
+        <meta property="og:description" content="Compete for prizes by building on the Logos execution layer. Browse the Lambda Prize program and ship code to win funding." />
+        <meta property="og:url" content="https://build.logos.co/prize" />
+        <meta property="og:image" content="https://build.logos.co/og.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@Logos_network" />
+        <meta name="twitter:title" content="Prizes | Logos Builders Hub" />
+        <meta name="twitter:description" content="Compete for prizes by building on the Logos execution layer. Ship code, win funding." />
+        <link rel="canonical" href="https://build.logos.co/prize" />
+      </Head>
+      <div id="Layout">
+        <SiteHeader />
+
+        <main
+          id="content"
+          className="flex w-full"
+          style={{
+            paddingTop:
+              "calc(var(--spacing-header-height-expanded) + var(--spacing-gutter))",
+          }}
+        >
+          <div className="grow w-full">
+            {/* ── Back Link ── */}
+            <section className="theme-default">
+              <div className="mx-auto px-margin max-w-site-max-w-margin">
+                <TextLink to="/" arrow arrowPosition="left" underlined={false}>
+                  BUILDERS HUB
+                </TextLink>
+              </div>
+            </section>
+
+            {/* ── Page Header ── */}
+            <section className="pt-v-space-sm pb-half-v-space theme-default">
+              <div className="mx-auto px-margin max-w-site-max-w-margin">
+                <ScrollEntrance className="grid gap-gutter grid-cols-12">
+                  <div className="col-span-5">
+                    <h1 className="h2 text-balance flex items-center gap-3">
+                      <img src="/mark.svg" alt="" className="h-[0.8em]" />
+                      Prizes
+                    </h1>
+                  </div>
+                  <div className="col-span-4 flex items-center">
+                    <p className="body-tiny max-w-[26em] text-balance">
+                      The Logos Lambda Prize program offers competitive prizes
+                      for building on the Logos stack. Browse all prizes below.
+                    </p>
+                  </div>
+                  <div className="col-span-3 flex items-center justify-end">
+                    <Button
+                      to="https://github.com/logos-co/lambda-prize"
+                      target="_blank"
+                      arrow
+                    >
+                      View the Repo
+                    </Button>
+                  </div>
+                </ScrollEntrance>
+
+                {/* ── View Toggle ── */}
+                <div className="mt-v-space-sm flex items-center gap-3">
+                  <button
+                    onClick={() => setView("grid")}
+                    className={cx("h6 cursor-pointer pb-1", {
+                      "animate-underline underlined": view === "grid",
+                      "opacity-50": view !== "grid",
+                    })}
+                  >
+                    GRID
+                  </button>
+                  <span className="h6 opacity-30">/</span>
+                  <button
+                    onClick={() => setView("list")}
+                    className={cx("h6 cursor-pointer pb-1", {
+                      "animate-underline underlined": view === "list",
+                      "opacity-50": view !== "list",
+                    })}
+                  >
+                    List
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* ── Prize Content ── */}
+            <section className="pb-v-space theme-default">
+              {view === "grid" ? (
+                <div className="mx-auto px-margin max-w-site-max-w-margin">
+                  <ScrollEntrance className="grid gap-x-gutter gap-y-v-space-sm grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+                    {prizes.map((prize) => (
+                      <PrizeCard key={prize.number} prize={prize} />
+                    ))}
+                  </ScrollEntrance>
+                </div>
+              ) : (
+                <ScrollEntrance>
+                  <ol>
+                    {prizes.map((prize, i) => (
+                      <PrizeRow key={prize.number} index={i} prize={prize} />
+                    ))}
+                  </ol>
+                </ScrollEntrance>
+              )}
+              {prizes.length === 0 && (
+                <div className="px-margin py-v-space text-center">
+                  <p className="body-tiny opacity-60">No prizes found.</p>
+                </div>
+              )}
+            </section>
+          </div>
+        </main>
+      </div>
+    </>
+  );
+}
+
+/* ─────────────── Fetch prizes from GitHub at build time ──────── */
+
+export const getStaticProps: GetStaticProps<{ prizes: PrizeData[] }> = async () => {
+  try {
+    const prizes = await fetchPrizes();
+    return { props: { prizes }, revalidate: 3600 };
+  } catch (err) {
+    console.error("Failed to fetch prizes:", err);
+    return { props: { prizes: [] }, revalidate: 60 };
+  }
+};

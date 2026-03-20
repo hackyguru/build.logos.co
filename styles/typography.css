@@ -1,0 +1,461 @@
+@utility responsive-font-size {
+  font-size: clamp(
+    calc(var(--mobile) * 1px),
+    calc(
+      (var(--mobile) * 1px) +
+      ((var(--desktop) - var(--mobile)) * ((100vw - 400px) / 1040))
+    ),
+    calc(var(--desktop) * 1px)
+  );
+
+  @media (min-width: 1440px) {
+    font-size: clamp(
+      calc(var(--desktop) * 1px),
+      calc(
+        (var(--desktop) * 1px) +
+        ((var(--desktop-large) - var(--desktop)) * ((100vw - 1440px) / 960))
+      ),
+      calc(var(--desktop-large) * 1px)
+    );
+  }
+
+  @media (min-width: 2400px) {
+    font-size: calc(var(--desktop-large) * 1px);
+  }
+}
+
+/* Typography Utilities */
+@utility h0 {
+  --mobile: 70;
+  --desktop: 140;
+  --desktop-large: 140;
+  @apply responsive-font-size;
+  font-family: var(--font-main);
+  line-height: 1em;
+  letter-spacing: -0.04em;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+}
+
+@utility h1 {
+  --mobile: 56;
+  --desktop: 96;
+  --desktop-large: 96;
+  @apply responsive-font-size;
+  font-family: var(--font-main);
+  line-height: .98em;
+  letter-spacing: -0.04em;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+}
+
+@utility h2 {
+  --mobile: 40;
+  --desktop: 56;
+  --desktop-large: 56;
+  @apply responsive-font-size;
+  font-family: var(--font-main);
+  line-height: 1em;
+  letter-spacing: -0.03em;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+}
+
+@utility h3 {
+  --mobile: 30;
+  --desktop: 36;
+  --desktop-large: 36;
+  @apply responsive-font-size;
+  font-family: var(--font-main);
+  line-height: 1em;
+  letter-spacing: -0.03em;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+  &.sans {
+    font-family: var(--font-secondary);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility h4 {
+  --mobile: 24;
+  --desktop: 24;
+  --desktop-large: 24;
+  @apply responsive-font-size;
+  font-family: var(--font-main);
+  line-height: 1.1em;
+  letter-spacing: -0.01em;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+  &.sans {
+    font-family: var(--font-secondary);
+  }
+}
+
+/* Subhead */
+@utility h5 {
+  --mobile: 18;
+  --desktop: 18;
+  --desktop-large: 18;
+  @apply responsive-font-size;
+  font-family: var(--font-main);
+  line-height: 1.1em;
+  letter-spacing: -0.01em;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+  &.sans {
+    font-family: var(--font-secondary);
+  }
+}
+
+@utility h6 {
+  --mobile: 10;
+  --desktop: 10;
+  --desktop-large: 10;
+  @apply responsive-font-size;
+  font-family: var(--font-mono);
+  line-height: 1.3em;
+  letter-spacing: 0;
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+@utility allcaps {
+  --mobile: 12;
+  --desktop: 14;
+  --desktop-large: 14;
+  @apply responsive-font-size;
+  font-family: var(--font-mono);
+  line-height: 1.3em;
+  letter-spacing: 0;
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+@utility smallcaps {
+  --mobile: 11;
+  --desktop: 12;
+  --desktop-large: 12;
+  @apply responsive-font-size;
+  font-family: var(--font-mono);
+  line-height: 1.3em;
+  letter-spacing: 0;
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+@utility tinycaps {
+  --mobile: 10;
+  --desktop: 10;
+  --desktop-large: 10;
+  @apply responsive-font-size;
+  font-family: var(--font-mono);
+  line-height: 1.3em;
+  letter-spacing: 0;
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+@utility body {
+  --mobile: 14;
+  --desktop: 14;
+  --desktop-large: 14;
+  @apply responsive-font-size;
+  font-family: var(--font-secondary);
+  line-height: 1.2em;
+  letter-spacing: 0;
+  font-weight: normal;
+  font-style: normal;
+  &.serif {
+    font-family: var(--font-main);
+  }
+}
+
+@utility body-medium {
+  @apply body;
+  --mobile: 16;
+  --desktop: 18;
+  --desktop-large: 18;
+}
+
+@utility body-large {
+  @apply body;
+  --mobile: 18;
+  --desktop: 20;
+  --desktop-large: 20;
+}
+
+@utility body-small {
+  @apply body;
+  --mobile: 13;
+  --desktop: 14;
+  --desktop-large: 14;
+}
+
+@utility body-tiny {
+  --mobile: 10;
+  --desktop: 10;
+  --desktop-large: 10;
+  @apply responsive-font-size;
+  font-family: var(--font-mono);
+  line-height: 1.3em;
+  letter-spacing: 0;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+}
+
+@utility blockquote {
+  @apply h4
+}
+
+@utility mono {
+  font-family: var(--font-mono);
+}
+
+/* Apply utilities to HTML elements and compound selectors */
+@layer utilities {
+  h1 a,
+  h2 a,
+  h3 a,
+  h4 a,
+  h5 a,
+  h6 a,
+  p a {
+    text-decoration: none;
+  }
+
+  h1:not(.h2, .h3, .h4, .h5, .h6, [class*="body-"], [data-ui]),
+  .h1 p,
+  .h1.rich-text p {
+    @apply h1;
+  }
+
+  h2:not(.h1, .h3, .h4, .h5, .h6, [class*="body-"], [data-ui]),
+  .h2 p,
+  .h2.rich-text p {
+    @apply h2;
+  }
+
+  h3:not(.h1, .h2, .h4, .h5, .h6, [class*="body-"], [data-ui]),
+  .h3 p,
+  .h3.rich-text p {
+    @apply h3;
+  }
+
+  h4:not(.h1, .h2, .h3, .h5, .h6, [class*="body-"], [data-ui]),
+  .h4 p,
+  .h4.rich-text p {
+    @apply h4;
+  }
+
+  h5:not(.h1, .h2, .h3, .h4, .h6, [class*="body-"], [data-ui]),
+  .h5 p,
+  .h5.rich-text p {
+    @apply h5;
+  }
+
+  h6:not(.h1, .h2, .h3, .h4, .h5, [class*="body-"], [data-ui]),
+  .h6 p,
+  .h6.rich-text p,
+  .caption,
+  figcaption,
+  .eyebrow {
+    @apply h6;
+  }
+
+  p,
+  .body p,
+  .body ul,
+  .body ol {
+    @apply body;
+  }
+
+  p.medium,
+  .body-medium p,
+  ul.medium,
+  .body-medium ul,
+  ol.medium,
+  .body-medium ol {
+    @apply body-medium;
+  }
+
+  p.large,
+  .body-large p,
+  ul.large,
+  .body-large ul,
+  ol.large,
+  .body-large ol {
+    @apply body-large;
+  }
+
+  p.small,
+  .body-small p,
+  ul.small,
+  .body-small ul,
+  ol.small,
+  .body-small ol {
+    @apply body-small;
+  }
+
+  p.tiny,
+  .body-tiny p,
+  ul.tiny,
+  .body-tiny ul,
+  ol.tiny,
+  .body-tiny ol {
+    @apply body-tiny;
+  }
+
+  blockquote,
+  .blockquote p {
+    @apply blockquote;
+  }
+
+  .mono > p {
+    @apply mono;
+  }
+
+  strong,
+  b,
+  .bold {
+    font-weight: var(--font-weight-bold);
+  }
+
+  a,
+  button,
+  .button,
+  .link {
+    cursor: pointer;
+  }
+
+  hr {
+    border-color: var(--color-hr);
+  }
+
+  /* Rich Text */
+  .rich-text,
+  [data-slate-editor='true'] {
+    --vertical-spacing: calc(var(--spacing-gutter) * 2);
+    .embeded-content {
+      margin: 0 0 var(--spacing, var(--vertical-spacing)) 0;
+    }
+
+    figcaption {
+      margin: 1em 0 3em;
+    }
+
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3 {
+      margin-top: 1em;
+      margin-bottom: var(--vertical-spacing);
+    }
+
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6 {
+      margin-top: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    p:not([class]),
+    .body,
+    .body-medium,
+    .body-large,
+    .body-small,
+    .body-tiny {
+      margin-bottom: 1em;
+    }
+
+    > *:first-child,
+    .first-item {
+      margin-top: 0;
+      .sanity-pte {
+        margin-top: 0 !important;
+      }
+    }
+
+    > *:last-child,
+    .last-item {
+      margin-bottom: 0;
+    }
+
+    ul,
+    ol {
+      margin-top: 1em;
+      margin-bottom: 1em;
+      li:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    li {
+      padding-left: 1.25em;
+      position: relative;
+      margin-bottom: 0.5em;
+      p {
+        margin-bottom: 0;
+      }
+      &.checklist-item {
+        padding-left: 1.5em;
+      }
+    }
+
+    ul:not(.list-none) li:before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      top: 0.75em;
+      left: 0;
+      margin-top: -.4em;
+      background: var(--color-light-grey);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    ol {
+      counter-reset: li-counter;
+    }
+
+    ol li {
+      counter-increment: li-counter;
+    }
+
+    ol li:before {
+      content: counter(li-counter) '.';
+      top: 0;
+      left: 0;
+      color: var(--color-main);
+      position: absolute;
+    }
+  }
+
+  p {
+    code {
+      font-size: 0.9em;
+    }
+  }
+
+  ::selection {
+    color: var(--color-dark);
+    background: var(--color-main);
+  }
+}

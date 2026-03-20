@@ -1,0 +1,316 @@
+#Layout,
+.ReactModalPortal,
+.ReactModal__Content {
+  .input-component {
+    --input-border-width: 1px;
+    --input-height: var(--spacing-button-height);
+    --textarea-height: var(--input-height);
+    --input-bg: transparent;
+    --input-color: var(--color-text);
+    --input-border: var(--color-hr);
+    --input-border-radius: var(--radius);
+    /* Hover */
+    --input-hover-bg: transparent;
+    --input-hover-color: var(--color-text);
+    --input-hover-border: var(--color-text);
+    /* Focus */
+    --input-focus-bg: transparent;
+    --input-focus-color: var(--color-text);
+    --input-focus-border: var(--color-text);
+
+    .input,
+    .PhoneInputInput,
+    select,
+    textarea {
+      appearance: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+      outline: none;
+      width: 100%;
+      vertical-align: middle;
+      background: var(--input-bg);
+      border: var(--input-border-width) solid var(--input-border);
+      height: var(--input-height);
+      line-height: 1em;
+      text-transform: inherit;
+      letter-spacing: inherit;
+      border-radius: var(--input-border-radius);
+      color: inherit;
+      font-style: inherit;
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      text-align: left;
+      box-shadow: none;
+      padding: 0 calc(var(--input-height) * 0.3) 0;
+      &:-webkit-autofill {
+        background-color: var(--input-bg) !important;
+        box-shadow: inset 0 0 200px 200px var(--input-bg);
+				transition: background-color 5000s ease-in-out 0s;
+				-webkit-text-fill-color: var(--input-color) !important;
+				color: var(--input-color) !important;
+        background-clip: text;
+			}
+			&:-internal-autofill-selected,
+			&:-webkit-autofill,
+			&:-internal-autofill:hover,
+			&:-webkit-autofill:focus {
+				background-color: var(--input-bg) !important;
+        box-shadow: inset 0 0 200px 200px var(--input-bg);
+				border-color: var(--input-border);
+				-webkit-text-fill-color: var(--input-color) !important;
+				color: var(--input-color) !important;
+        background-clip: text;
+			}
+      &[type='number'] {
+        -moz-appearance: none;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    select {
+      color: var(--color-text);
+    }
+
+    /* Textarea Specific */
+    textarea {
+      min-height: var(--textarea-height);
+      height: auto;
+      line-height: 1.3em;
+      padding: calc(var(--input-height) * 0.33) calc(var(--input-height) * 0.3);
+      resize: none;
+      padding-top: calc(var(--input-height) * 0.2) !important;
+      padding-bottom: calc(var(--input-height) * 0.2) !important;
+    }      
+  
+    /* Input Sizes (Ideally matches button sizes) */
+    &.small {
+      --input-height: 32px;
+    }
+    
+    &.large {
+      --input-height: 70px;
+    }
+  
+    .input.disabled,
+    .input[disabled],
+    textarea.disabled,
+    textarea[disabled] {
+      opacity: .3;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+    }
+  
+    @media (hover: hover) {
+      &:hover .input,
+      &:hover textarea,
+      &:hover select {
+        --input-bg: var(--input-hover-bg);
+        --input-color: var(--input-hover-color);
+        --input-border: var(--input-hover-border);
+      }
+    }
+    
+    &[data-focused=true] .input,
+    &[data-focused=true] textarea {
+      --input-bg: var(--input-hover-bg);
+      --input-color: var(--input-hover-color);
+      --input-border: var(--input-hover-border);
+    }
+    
+    &.has-label .input,
+    &.has-label .PhoneInputInput,
+    &.has-label select,
+    &.has-label textarea {
+      padding-top: 12px;
+    }
+
+    /* Underlined */
+    &.underlined {
+      input,
+      > .input,
+      select,
+      textarea,
+      .input-label {
+        --input-color: var(--color-text);
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        padding-left: 0;
+        margin-left: 0;
+        .PhoneInputCountryIcon {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &.underlined .input::placeholder,
+    &.underlined textarea::placeholder {
+      color: var(--input-color);
+    }
+
+    .input::placeholder,
+    textarea::placeholder {
+      color: var(--light-text-color);
+    }
+    
+    .input:not([class*="transition"]),
+    textarea:not([class*="transition"]),
+    select:not([class*="transition"]) {
+      transition: background var(--speed-md) ease-in-out,
+                  color var(--speed-md) ease-in-out,
+                  border var(--speed-md) ease-in-out,
+                  box-shadow var(--speed-md) ease-in-out,
+                  transform var(--speed-md) ease-in-out,
+                  opacity var(--speed-md) ease-in-out;
+    }
+    
+    &.solid {
+      --input-bg: var(--white);
+      --input-color: var(--color-text);
+      --input-border: var(--white);
+      /* Hover */
+      --input-hover-bg: var(--white);
+      --input-hover-color: var(--color-text);
+      --input-hover-border: var(--white);
+      /* Focus */
+      --input-focus-bg: var(--bg-grey);
+      --input-focus-color: var(--color-text);
+      --input-focus-border: var(--color-text);
+    }
+    
+    /* Input Themes */
+    &.transparent {
+      --input-bg: transparent;
+      --input-color: var(--light-text-color);
+      --input-border: transparent;
+      /* Hover */
+      --input-hover-bg: transparent;
+      --input-hover-color: var(--color-text);
+      --input-hover-border: transparent;
+      /* Focus */
+      --input-focus-bg: transparent;
+      --input-focus-color: var(--color-text);
+      --input-focus-border: var(--color-text);
+    }
+
+    &.transparent,
+    &.underlined {
+      input {
+        &:-webkit-autofill {
+          box-shadow: inset 0 0 200px 200px var(--color-bg);
+        }
+        &:-internal-autofill-selected,
+        &:-webkit-autofill,
+        &:-internal-autofill:hover,
+        &:-webkit-autofill:focus {
+          box-shadow: inset 0 0 200px 200px var(--color-bg);
+        }
+      }
+    }
+    
+    /* Input Icon */
+    &:not(.underlined) .input-icon {
+      aspect-ratio: 1;
+    }
+    
+    /* Input Label */
+    .input-label {
+      position: absolute;
+      font-style: inherit;
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      top: 0;
+      left: var(--input-border-width);
+      margin: 0 calc(var(--input-height) * 0.3);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+      color: var(--input-color);
+      height: var(--input-height);
+      transition: transform var(--speed-md) cubic-bezier(0.44, 0.24, 0.16, 1.00),
+                  color var(--speed-md) cubic-bezier(0.44, 0.24, 0.16, 1.00),
+                  font-weight var(--speed-md) cubic-bezier(0.44, 0.24, 0.16, 1.00);
+      transform-origin: 0% 50%;
+    }
+    
+    &[data-focused=true] .input-label,
+    &.has-value .input-label {
+      transform: translate3d(0, -10px, 0) scale(.6);
+      font-weight: var(--font-weight-medium);
+      color: var(--light-text-color);
+    }
+    
+    &.icon-left .input-label {
+      margin-left: var(--input-size);
+    }
+    
+    &.icon-right .input-label {
+      margin-right: var(--input-size);
+    }
+    
+    &[data-focused=true] .input-label,
+    &.has-value .input-label,
+    &.has-placeholder .input-label {
+    }
+    
+    /* States */
+    &.error .input-icon,
+    &.error .input-label {
+      color: var(--error);
+    }
+    &.error .input,
+    &.error select {
+      border-color: var(--error);
+    }
+    
+    &.success .input-icon,
+    &.success .input-label {
+      color: var(--success);
+    }
+    &.success .input {
+      border-color: var(--success);
+    }
+  }
+
+  .PhoneInput + .input-label {
+    left: 42px !important;
+  }
+
+  .PhoneInputCountryIcon {
+    font-size: 10px;
+    margin-top: 2px;
+    margin-left: calc(var(--input-height) * 0.3);
+    img {
+      mix-blend-mode: luminosity;
+    }
+  }
+
+  .PhoneInputCountryIcon--border {
+    background-color: var(--color-bg);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 1.5);
+  }
+  
+  .PhoneInputCountrySelectArrow {
+    margin-top: 0px;
+    margin-left: 8px;
+  }
+  
+  .PhoneInput.input {
+    padding: 0 !important;
+    input {
+      border-color: transparent;
+      background-color: transparent;
+      padding: 0 calc(var(--input-height) * 0.3) 0 calc(var(--input-height) * 0.06);
+    }
+  }
+}

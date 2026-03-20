@@ -1,0 +1,48 @@
+/* Global Transition Variables */
+:root {
+  --speed-md: 0.3s;
+  --speed-fast: 0.15s;
+  --speed-slow: 0.6s;
+  --speed-stagger: 0.05s;
+}
+
+/*
+ * Responsive Variables
+ *
+ * Each variable smoothly interpolates between 3 breakpoints:
+ *   400px → 1440px (mobile → desktop)
+ *   1440px → 2400px (desktop → desktop-large)
+ *   2400px+ (capped at desktop-large)
+ *
+ * The input values (e.g. --gutter-mobile) are unitless numbers
+ * defined in globals.css :root and converted to px here.
+ */
+:root {
+  --gutter: clamp(calc(var(--gutter-mobile) * 1px), calc((var(--gutter-mobile) * 1px) + (var(--gutter-desktop) - var(--gutter-mobile)) * ((100vw - 400px) / 1040)), calc(var(--gutter-desktop) * 1px));
+  --margin: clamp(calc(var(--margin-mobile) * 1px), calc((var(--margin-mobile) * 1px) + (var(--margin-desktop) - var(--margin-mobile)) * ((100vw - 400px) / 1040)), calc(var(--margin-desktop) * 1px));
+  --v-space: clamp(calc(var(--v-space-mobile) * 1px), calc((var(--v-space-mobile) * 1px) + (var(--v-space-desktop) - var(--v-space-mobile)) * ((100vw - 400px) / 1040)), calc(var(--v-space-desktop) * 1px));
+  --v-space-small: clamp(calc(var(--v-space-small-mobile) * 1px), calc((var(--v-space-small-mobile) * 1px) + (var(--v-space-small-desktop) - var(--v-space-small-mobile)) * ((100vw - 400px) / 1040)), calc(var(--v-space-small-desktop) * 1px));
+  --header-height: clamp(calc(var(--header-height-mobile) * 1px), calc((var(--header-height-mobile) * 1px) + (var(--header-height-desktop) - var(--header-height-mobile)) * ((100vw - 400px) / 1040)), calc(var(--header-height-desktop) * 1px));
+  --header-height-expanded: clamp(calc(var(--header-height-expanded-mobile) * 1px), calc((var(--header-height-expanded-mobile) * 1px) + (var(--header-height-expanded-desktop) - var(--header-height-expanded-mobile)) * ((100vw - 400px) / 1040)), calc(var(--header-height-expanded-desktop) * 1px));
+  --header-logo-width: clamp(calc(var(--header-logo-width-mobile) * 1px), calc((var(--header-logo-width-mobile) * 1px) + (var(--header-logo-width-desktop) - var(--header-logo-width-mobile)) * ((100vw - 400px) / 1040)), calc(var(--header-logo-width-desktop) * 1px));
+
+  @media (min-width: 1440px) {
+    --gutter: clamp(calc(var(--gutter-desktop) * 1px), calc((var(--gutter-desktop) * 1px) + (var(--gutter-desktop-large) - var(--gutter-desktop)) * ((100vw - 1440px) / 960)), calc(var(--gutter-desktop-large) * 1px));
+    --margin: clamp(calc(var(--margin-desktop) * 1px), calc((var(--margin-desktop) * 1px) + (var(--margin-desktop-large) - var(--margin-desktop)) * ((100vw - 1440px) / 960)), calc(var(--margin-desktop-large) * 1px));
+    --v-space: clamp(calc(var(--v-space-desktop) * 1px), calc((var(--v-space-desktop) * 1px) + (var(--v-space-desktop-large) - var(--v-space-desktop)) * ((100vw - 1440px) / 960)), calc(var(--v-space-desktop-large) * 1px));
+    --v-space-small: clamp(calc(var(--v-space-small-desktop) * 1px), calc((var(--v-space-small-desktop) * 1px) + (var(--v-space-small-desktop-large) - var(--v-space-small-desktop)) * ((100vw - 1440px) / 960)), calc(var(--v-space-small-desktop-large) * 1px));
+    --header-height: clamp(calc(var(--header-height-desktop) * 1px), calc((var(--header-height-desktop) * 1px) + (var(--header-height-desktop-large) - var(--header-height-desktop)) * ((100vw - 1440px) / 960)), calc(var(--header-height-desktop-large) * 1px));
+    --header-height-expanded: clamp(calc(var(--header-height-expanded-desktop) * 1px), calc((var(--header-height-expanded-desktop) * 1px) + (var(--header-height-expanded-desktop-large) - var(--header-height-expanded-desktop)) * ((100vw - 1440px) / 960)), calc(var(--header-height-expanded-desktop-large) * 1px));
+    --header-logo-width: clamp(calc(var(--header-logo-width-desktop) * 1px), calc((var(--header-logo-width-desktop) * 1px) + (var(--header-logo-width-desktop-large) - var(--header-logo-width-desktop)) * ((100vw - 1440px) / 960)), calc(var(--header-logo-width-desktop-large) * 1px));
+  }
+
+  @media (min-width: 2400px) {
+    --gutter: calc(var(--gutter-desktop-large) * 1px);
+    --margin: calc(var(--margin-desktop-large) * 1px);
+    --v-space: calc(var(--v-space-desktop-large) * 1px);
+    --v-space-small: calc(var(--v-space-small-desktop-large) * 1px);
+    --header-height: calc(var(--header-height-desktop-large) * 1px);
+    --header-height-expanded: calc(var(--header-height-expanded-desktop-large) * 1px);
+    --header-logo-width: calc(var(--header-logo-width-desktop-large) * 1px);
+  }
+}
