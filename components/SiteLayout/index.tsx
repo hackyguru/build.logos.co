@@ -169,7 +169,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <main
         id="content"
-        className="flex w-full"
+        className="flex w-full min-h-screen"
         style={{
           paddingTop: "calc(var(--spacing-header-height-expanded) + var(--spacing-gutter))",
         }}
