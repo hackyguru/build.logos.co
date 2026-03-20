@@ -46,7 +46,7 @@ const Link = ({
 
 	let linkProps = {
 		href: href || to || '',
-		scroll: false,
+		scroll: !(href || '').startsWith('#'),
 		target: target,
 		...(target === '_blank' && { rel: 'noopener noreferrer' }),
 	}

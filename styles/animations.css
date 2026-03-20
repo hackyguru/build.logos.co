@@ -37,6 +37,11 @@
     }
   }
 
+  /* Shimmer (skeleton loading) */
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+
   /* Rotate */
   @keyframes rotate {
     100% { transform: rotate(360deg); }

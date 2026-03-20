@@ -4,175 +4,18 @@ import Image from "next/image";
 import Link from "@components/Link";
 import TextLink from "@components/TextLink";
 import Button from "@components/Button";
-import Logo, { Logomark } from "@components/Logo";
 import ScrollEntrance from "@components/ScrollEntrance";
+import SiteLayout from "@components/SiteLayout";
 import cx from "classnames";
 import type { GetStaticProps } from "next";
-
-
-/*  Header  */
-
-const SiteHeader = () => (
-  <div className="sticky top-0 z-[11] h-0">
-    <header className="main-header bg-bg h-header-height-expanded transition-all">
-      <div className="px-margin grid grid-cols-2 gap-gutter items-center h-full">
-        <div className="h-full flex items-center">
-          <TextLink to="/" underlined={false}>
-            Logos
-          </TextLink>
-        </div>
-        <div className="flex items-center h-full justify-end">
-          <div className="w-header-logo-width">
-            <Link to="/" title="Go to homepage" className="block">
-              <Logomark className="flex items-center" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </header>
-  </div>
-);
-
-/*  Footer  */
-
-const footerLists = [
-  {
-    title: "Work",
-    links: [
-      { label: "Work With Us", to: "https://free.technology/jobs", external: true },
-    ],
-  },
-  {
-    title: "Social",
-    links: [
-      { label: "Twitter", to: "https://x.com/Logos_network", external: true },
-      { label: "Discord", to: "https://discord.gg/logosnetwork", external: true },
-      { label: "YouTube", to: "https://www.youtube.com/@LogosNetwork", external: true },
-      { label: "Blog", to: "https://press.logos.co/", external: true },
-      { label: "GitHub", to: "https://github.com/logos-co", external: true },
-    ],
-  },
-];
-
-const footerLists2 = [
-  {
-    title: "Research",
-    links: [
-      { label: "Logos Research", to: "https://research.logos.co/", external: true },
-    ],
-  },
-];
-
-const footerLegal = [
-  { label: "Terms & Conditions", to: "/terms-conditions" },
-  { label: "Privacy Policy", to: "/privacy-policy" },
-  { label: "Security", to: "/security" },
-];
-
-const FooterLinkList = ({ title, links }: { title?: string; links: { label: string; to: string; external?: boolean }[] }) => (
-  <div>
-    {title && <h6 className="mb-[4px]">{title}</h6>}
-    <ul className="body-tiny">
-      {links.map((link) => (
-        <li key={link.label}>
-          <Link
-            to={link.to}
-            target={link.external ? "_blank" : undefined}
-            className="transition-none! group cursor-pointer inline-block align-top py-[2px]"
-          >
-            <span className="animate-underline underlined py-[2px]">
-              {link.label}
-            </span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-const SiteFooter = () => (
-  <footer className="theme-dark">
-    <div className="px-margin pt-margin pb-v-space-sm">
-      <div className="grid gap-x-gutter gap-y-v-space grid-cols-4 md:grid-cols-6">
-        {/* Footer image placeholder */}
-        <div className="md:row-span-2 md:col-span-2 lg:col-span-1">
-          <div className="relative aspect-video overflow-hidden rounded">
-            <Image
-              src="/footer.avif"
-              alt=""
-              width={300}
-              height={170}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Logo + tagline row */}
-        <div className="col-span-full col-start-3 row-start-1 md:col-start-4 md:row-start-1">
-          <div className="md:grid gap-x-gutter md:grid-cols-3">
-            <div className="w-[65px] mb-8 md:mb-0">
-              <Logo />
-            </div>
-            <p className="body serif text-balance md:col-start-3 max-w-[12em] md:max-w-full">
-              Pioneering a new era of freedom.
-            </p>
-          </div>
-        </div>
-
-        {/* Work + Social */}
-        {footerLists.map((list, index) => (
-          <div
-            key={list.title}
-            className={cx({
-              "md:row-start-2": true,
-              "col-start-3 md:col-start-6": index % 2 !== 0,
-              "col-start-1 md:col-start-4": index % 2 === 0,
-            })}
-          >
-            <FooterLinkList title={list.title} links={list.links} />
-          </div>
-        ))}
-
-        {/* Built by IFT */}
-        <div className="col-start-1 md:col-start-1 md:row-start-3">
-          <ul className="body-tiny">
-            <li>
-              <Link
-                to="https://free.technology/"
-                target="_blank"
-                className="transition-none! group cursor-pointer inline-block align-top py-[2px]"
-              >
-                <span className="animate-underline underlined py-[2px]">
-                  Built by IFT
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Research */}
-        {footerLists2.map((list) => (
-          <div key={list.title} className="col-start-1 md:col-start-4 md:row-start-3">
-            <FooterLinkList title={list.title} links={list.links} />
-          </div>
-        ))}
-
-        {/* Legal */}
-        <div className="col-start-3 md:col-start-4 md:row-start-4">
-          <FooterLinkList links={footerLegal} />
-        </div>
-      </div>
-    </div>
-  </footer>
-);
 
 /*  Page  */
 
 export default function Home() {
   return (
-    <>
+    <SiteLayout>
       <Head>
-        <title>Builders Hub | Logos — Build on the Decentralized Tech Stack</title>
+        <title>Builder Hub | Logos</title>
         <meta name="description" content="Ideas, resources, and everything you need to start building with Logos tech. Explore documentation, contribute to open issues, win prizes, and connect with core contributors." />
         <meta name="keywords" content="Logos, builders hub, decentralized apps, blockchain development, Web3, open source, Waku, Codex, Nomos, dApps, developer tools" />
 
@@ -181,7 +24,7 @@ export default function Home() {
         <meta property="og:title" content="Builders Hub | Logos" />
         <meta property="og:description" content="Ideas, resources, and everything you need to start building with Logos tech. Explore docs, contribute, win prizes, and connect with core contributors." />
         <meta property="og:url" content="https://build.logos.co" />
-        <meta property="og:image" content="https://build.logos.co/og.jpeg" />
+        <meta property="og:image" content="https://build.logos.co/og.jpg" />
         <meta property="og:site_name" content="Logos Builders Hub" />
 
         {/* Twitter */}
@@ -189,7 +32,7 @@ export default function Home() {
         <meta name="twitter:site" content="@Logos_network" />
         <meta name="twitter:title" content="Builders Hub | Logos" />
         <meta name="twitter:description" content="Ideas, resources, and everything you need to start building with Logos tech. Explore docs, contribute, win prizes, and connect with core contributors." />
-        <meta name="twitter:image" content="https://build.logos.co/og.jpeg" />
+        <meta name="twitter:image" content="https://build.logos.co/og.jpg" />
 
         {/* Canonical */}
         <link rel="canonical" href="https://build.logos.co" />
@@ -200,12 +43,6 @@ export default function Home() {
       >
         Skip to content
       </Link>
-
-      <div id="Layout">
-        <SiteHeader />
-
-        <main id="content" className="flex w-full">
-          <div className="grow w-full">
 
             {/*  Section 1: Banner Strip  */}
             <section className="pb-half-v-space theme-default" style={{ paddingTop: "calc(var(--spacing-header-height-expanded) + var(--spacing-gutter))" }}>
@@ -238,6 +75,14 @@ export default function Home() {
             <section className="pt-half-v-space pb-half-v-space theme-default">
               <div className="mx-auto px-margin max-w-site-max-w-margin text-center">
                 <ScrollEntrance>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full border border-current/20 mb-4">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="none" />
+                      <line x1="12" y1="9" x2="12" y2="13" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                    Testnet
+                  </span>
                   <h2 className="h2 text-balance">
                     Logos<br />Builders Hub
                   </h2>
@@ -373,7 +218,7 @@ export default function Home() {
                   {/*  PHASE 02: TRY  */}
                   <div className="col-span-6 md:col-span-12 flex items-end gap-4 mt-gutter pb-2">
                     <span className="font-mono text-[3rem] md:text-[4.5rem] leading-none font-light opacity-[0.07] select-none">02</span>
-                    <h3 className="h4 sans pb-1">Try</h3>
+                    <h3 className="h4 sans pb-1">Try the app or run a node</h3>
                     <div className="flex-1 h-px bg-current opacity-10 mb-3" />
                   </div>
 
@@ -431,7 +276,7 @@ export default function Home() {
                     </div>
                     <div className="p-gutter">
                       <div className="flex items-baseline justify-between">
-                        <span className="h5 sans transition-transform group-hover:-translate-y-0.5">Run a Logos blockchain node</span>
+                        <span className="h5 sans transition-transform group-hover:-translate-y-0.5">Run blockchain node using CLI</span>
                         <span className="h6 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
                       </div>
                       <p className="body-tiny opacity-40 mt-2">
@@ -919,12 +764,7 @@ export default function Home() {
               </div>
             </section>
 
-          </div>
-        </main>
-
-        <SiteFooter />
-      </div>
-    </>
+    </SiteLayout>
   );
 }
 

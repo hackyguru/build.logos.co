@@ -3,34 +3,11 @@ import Head from "next/head";
 import Link from "@components/Link";
 import TextLink from "@components/TextLink";
 import Button from "@components/Button";
-import { Logomark } from "@components/Logo";
 import ScrollEntrance from "@components/ScrollEntrance";
+import SiteLayout from "@components/SiteLayout";
 import cx from "classnames";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { fetchRfps, type RfpData } from "@/lib/rfps";
-
-/* ─────────────────────── Header ─────────────────────────────── */
-
-const SiteHeader = () => (
-  <div className="sticky top-0 z-[11] h-0">
-    <header className="main-header bg-bg h-header-height-expanded transition-all">
-      <div className="px-margin grid grid-cols-2 gap-gutter items-center h-full">
-        <div className="h-full flex items-center">
-          <TextLink to="/" underlined={false}>
-            Logos
-          </TextLink>
-        </div>
-        <div className="flex items-center h-full justify-end">
-          <div className="w-header-logo-width">
-            <Link to="/" title="Go to homepage" className="block">
-              <Logomark className="flex items-center" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </header>
-  </div>
-);
 
 /* ───────────── RFP Grid Card ────────────────────────────────── */
 
@@ -126,7 +103,7 @@ export default function RfpPage({
   const [view, setView] = useState<"grid" | "list">("grid");
 
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>RFPs | Logos Builders Hub</title>
         <meta name="description" content="Apply for funded proposals. The Logos RFP Program backs developers building on the decentralized tech stack." />
@@ -134,25 +111,13 @@ export default function RfpPage({
         <meta property="og:title" content="RFPs | Logos Builders Hub" />
         <meta property="og:description" content="Apply for funded proposals. The Logos RFP Program backs developers building on the decentralized tech stack." />
         <meta property="og:url" content="https://build.logos.co/rfp" />
-        <meta property="og:image" content="https://build.logos.co/og.jpeg" />
+        <meta property="og:image" content="https://build.logos.co/og.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@Logos_network" />
         <meta name="twitter:title" content="RFPs | Logos Builders Hub" />
         <meta name="twitter:description" content="Apply for funded proposals. The Logos RFP Program backs developers building on the stack." />
         <link rel="canonical" href="https://build.logos.co/rfp" />
       </Head>
-      <div id="Layout">
-        <SiteHeader />
-
-        <main
-          id="content"
-          className="flex w-full"
-          style={{
-            paddingTop:
-              "calc(var(--spacing-header-height-expanded) + var(--spacing-gutter))",
-          }}
-        >
-          <div className="grow w-full">
             {/* ── Back Link ── */}
             <section className="theme-default">
               <div className="mx-auto px-margin max-w-site-max-w-margin">
@@ -240,10 +205,7 @@ export default function RfpPage({
                 </div>
               )}
             </section>
-          </div>
-        </main>
-      </div>
-    </>
+    </SiteLayout>
   );
 }
 
